@@ -20,7 +20,7 @@ func ReadFileIntoInts(filePath string) (numbers []int) {
 		return
 	}
 
-	lines := strings.Split(string(values), "\n")
+	lines := strings.Split(string(values), "\r\n")
 
 	for i, v := range lines {
 		if i < len(lines)-1 {
