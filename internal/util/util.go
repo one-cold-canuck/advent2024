@@ -8,8 +8,8 @@ import (
 	"strings"
 )
 
-// ReadFile reads a file of newline-separated integers, and returns a Slice of Ints
-func ReadFile(filePath string) (numbers []int) {
+// ReadFileIntoInts reads a file of newline-separated integers, and returns a Slice of Ints
+func ReadFileIntoInts(filePath string) (numbers []int) {
 
 	numbers = []int{}
 
@@ -35,4 +35,19 @@ func ReadFile(filePath string) (numbers []int) {
 	}
 
 	return numbers
+}
+
+func ReadFileIntoStrings(filePath string) (results []string) {
+	results = []string{}
+
+	values, err := os.ReadFile(filePath)
+
+	if err != nil {
+		fmt.Println("Error reading file!")
+		return
+	}
+
+	lines := strings.Split(string(values), "\n")
+
+	return lines
 }

@@ -7,12 +7,13 @@ import (
 )
 
 // RunDayOne processes the input for the Day 1 AoC puzzle (https://adventofcode.com/2024/day/1)
+// Input is split into 2 lists.
 func RunDayOne() []int {
 
 	results := []int{}
 
-	rightList := util.ReadFile("data/day1_rightlist.txt")
-	leftList := util.ReadFile("data/day1_leftlist.txt")
+	rightList := util.ReadFileIntoInts("data/day1_rightlist.txt")
+	leftList := util.ReadFileIntoInts("data/day1_leftlist.txt")
 
 	sort.Slice(leftList, func(i, j int) bool {
 		return leftList[i] < leftList[j]
