@@ -24,8 +24,11 @@ func main() {
 	PrintHeader(formatter)
 	resultOne := advent.RunDayOne()
 	resultTwo := advent.RunDayTwo()
+	resultThree := advent.RunDayThree()
+
 	PrintResult(resultOne, formatter, 1)
 	PrintResult(resultTwo, formatter, 2)
+	PrintResult(resultThree, formatter, 3)
 }
 
 func PrintHeader(format Formatter) {

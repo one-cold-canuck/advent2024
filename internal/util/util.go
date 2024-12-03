@@ -20,7 +20,7 @@ func ReadFileIntoInts(filePath string) (numbers []int) {
 		return
 	}
 
-	lines := strings.Split(string(values), "\r\n")
+	lines := strings.Split(string(values), "\n")
 
 	for i, v := range lines {
 		if i < len(lines)-1 {
@@ -50,4 +50,16 @@ func ReadFileIntoStrings(filePath string) (results []string) {
 	lines := strings.Split(string(values), "\n")
 
 	return lines
+}
+
+func ReadFile(filePath string) (filecontent []byte) {
+
+	filecontent, err := os.ReadFile(filePath)
+
+	if err != nil {
+		fmt.Println("Error reading file!")
+		return nil
+	}
+
+	return filecontent
 }
