@@ -1,12 +1,29 @@
 package advent
 
 import (
-	"fmt"
-	"regexp"
-	"slices"
-
 	"github.com/one-cold-canuck/advent2024/internal/util"
 )
+
+var dirs [][]int = [][]int{
+	{-1, -1}, // up-left
+	{0, -1},  // up
+	{1, -1},  // up-right
+	{-1, 0},  // left
+	{1, 0},   // right
+	{-1, 1},  // down-left
+	{0, 1},   // down
+	{1, 1},   // down-right
+}
+
+var diagdirs [][]int = [][]int{
+	{-1, -1},
+	{1, -1},
+	{-1, 1},
+	{1, 1},
+}
+
+var words []string = []string{"X", "M", "A", "S"}
+var diagwords []string = []string{"M", "A", "S"}
 
 func RunDayFour() (results []int) {
 
@@ -14,98 +31,66 @@ func RunDayFour() (results []int) {
 	results = append(results, 0)
 
 	input := util.ReadFileIntoStrings("data/day4.txt")
+	input = input[:len(input)-1]
 
-	gameboard := make([][]rune, 0)
+	xmascount := 0
 
-	for _, v := range input {
-		gameline := make([]rune, 0)
-		for _, val := range v {
-			if val != '\n' {
-				gameline = append(gameline, val)
-			}
-		}
-		gameboard = append(gameboard, gameline)
-	}
-
-	if len(gameboard) > 0 {
-		gameboard = gameboard[:len(gameboard)-1]
-	}
-
-	re := regexp.MustCompile("XMAS|SAMX")
-
-	COL_BOUND := len(gameboard[0]) - 4
-	ROW_BOUND := len(gameboard) - 4
-
-	xmasCount := 0
-	rowsChecked := make([]int, 0)
-
-	for i := 0; i <= ROW_BOUND; i++ {
-		for j := 0; j <= COL_BOUND; j++ {
-
-			rowone := []rune{gameboard[i][j], gameboard[i][j+1], gameboard[i][j+2], gameboard[i][j+3]}
-			rowtwo := []rune{gameboard[i+1][j], gameboard[i+1][j+1], gameboard[i+1][j+2], gameboard[i+1][j+3]}
-			rowthree := []rune{gameboard[i+2][j], gameboard[i+2][j+1], gameboard[i+2][j+2], gameboard[i+2][j+3]}
-			rowfour := []rune{gameboard[i+3][j], gameboard[i+3][j+1], gameboard[i+3][j+2], gameboard[i+3][j+3]}
-
-			colone := []rune{gameboard[i][j], gameboard[i+1][j], gameboard[i+2][j], gameboard[i+3][j]}
-			coltwo := []rune{gameboard[i][j+1], gameboard[i+1][j+1], gameboard[i+2][j+1], gameboard[i+3][j+1]}
-			colthree := []rune{gameboard[i][j+2], gameboard[i+1][j+2], gameboard[i+2][j+2], gameboard[i+3][j+2]}
-			colfour := []rune{gameboard[i][j+3], gameboard[i+1][j+3], gameboard[i+2][j+3], gameboard[i+3][j+3]}
-
-			diagone := []rune{gameboard[i][j], gameboard[i+1][j+1], gameboard[i+2][j+2], gameboard[i+3][j+3]}
-			diagtwo := []rune{gameboard[i][j+3], gameboard[i+1][j+2], gameboard[i+2][j+1], gameboard[i+3][j]}
-
-			if !slices.Contains(rowsChecked, i) {
-				if string(rowone) == "XMAS" || string(rowone) == "SAMX" {
-					xmasCount += 1
+	for x, row := range input {
+		for y, character := range row {
+			if string(words[0]) == string(character) {
+				for _, dir := range dirs {
+					if GetMatching(x, y, 1, dir, input) {
+						xmascount += 1
+					}
 				}
-				if string(colone) == "XMAS" || string(colone) == "SAMX" {
-					xmasCount += 1
-				}
-				if string(coltwo) == "XMAS" || string(coltwo) == "SAMX" {
-					xmasCount += 1
-				}
-				if string(colthree) == "XMAS" || string(colthree) == "SAMX" {
-					xmasCount += 1
-				}
-				if string(colfour) == "XMAS" || string(colfour) == "SAMX" {
-					xmasCount += 1
-				}
-				rowsChecked = append(rowsChecked, i)
-			}
-			if !slices.Contains(rowsChecked, i+1) {
-				if string(rowtwo) == "XMAS" || string(rowtwo) == "SAMX" {
-					xmasCount += 1
-				}
-				rowsChecked = append(rowsChecked, i+1)
-			}
-			if !slices.Contains(rowsChecked, i+2) {
-				if string(rowthree) == "XMAS" || string(rowthree) == "SAMX" {
-					xmasCount += 1
-				}
-				rowsChecked = append(rowsChecked, i+2)
-			}
-			if !slices.Contains(rowsChecked, i+3) {
-				if string(rowfour) == "XMAS" || string(rowfour) == "SAMX" {
-					xmasCount += 1
-				}
-				rowsChecked = append(rowsChecked, i+3)
-			}
-
-			if string(diagone) == "XMAS" || string(diagone) == "SAMX" {
-				xmasCount += 1
-			}
-			if string(diagtwo) == "XMAS" || string(diagtwo) == "SAMX" {
-				xmasCount += 1
-			}
-
-			if slices.Contains(rowsChecked, 139) {
-				fmt.Println(rowfour)
 			}
 		}
 	}
-	results[0] = xmasCount
-	fmt.Println(rowsChecked)
+
+	results[0] = xmascount
+
+	diagxmascount := 0
+
+	for x, row := range input {
+		for y, character := range row {
+			if string(character) == "A" {
+				if GetMatchingDiag(x, y, input) {
+					diagxmascount += 1
+				}
+			}
+		}
+	}
+	results[1] = diagxmascount
 
 	return results
+}
+
+func GetMatching(xPos int, yPos int, wordPos int, dir []int, input []string) bool {
+	nextX := xPos + dir[0]
+	nextY := yPos + dir[1]
+
+	if wordPos > len(words)-1 {
+		return true
+	}
+
+	if nextX < 0 || nextX >= len(input) || nextY < 0 || nextY >= len(input[xPos]) {
+		return false
+	}
+
+	if string(input[nextX][nextY]) == words[wordPos] {
+		return GetMatching(nextX, nextY, wordPos+1, dir, input)
+	}
+	return false
+}
+
+func GetMatchingDiag(xPos int, yPos int, input []string) bool {
+
+	if xPos-1 < 0 || xPos+1 >= len(input) || yPos-1 < 0 || yPos+1 >= len(input[xPos]) {
+		return false
+	}
+
+	firstMatch := (string(input[xPos-1][yPos-1]) == "M" && string(input[xPos+1][yPos+1]) == "S") || (string(input[xPos-1][yPos-1]) == "S" && string(input[xPos+1][yPos+1]) == "M")
+	secondMatch := (string(input[xPos-1][yPos+1]) == "M" && string(input[xPos+1][yPos-1]) == "S") || (string(input[xPos-1][yPos+1]) == "S" && string(input[xPos+1][yPos-1]) == "M")
+
+	return firstMatch && secondMatch
 }

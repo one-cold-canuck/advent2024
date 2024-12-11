@@ -9,7 +9,7 @@ import (
 )
 
 // ReadFileIntoInts reads a file of newline-separated integers, and returns a Slice of Ints
-func ReadFileIntoInts(filePath string) (numbers []int) {
+func ReadFileIntoInts(filePath string, separator string) (numbers []int) {
 
 	numbers = []int{}
 
@@ -20,7 +20,7 @@ func ReadFileIntoInts(filePath string) (numbers []int) {
 		return
 	}
 
-	lines := strings.Split(string(values), "\n")
+	lines := strings.Split(string(values), separator)
 
 	for i, v := range lines {
 		if i < len(lines)-1 {

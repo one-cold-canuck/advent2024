@@ -12,8 +12,8 @@ func RunDayOne() []int {
 
 	results := []int{}
 
-	rightList := util.ReadFileIntoInts("data/day1_rightlist.txt")
-	leftList := util.ReadFileIntoInts("data/day1_leftlist.txt")
+	rightList := util.ReadFileIntoInts("data/day1_rightlist.txt", "\n")
+	leftList := util.ReadFileIntoInts("data/day1_leftlist.txt", "\n")
 
 	sort.Slice(leftList, func(i, j int) bool {
 		return leftList[i] < leftList[j]
