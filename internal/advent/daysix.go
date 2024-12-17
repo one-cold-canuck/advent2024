@@ -64,16 +64,12 @@ func GetNextDirection(dir rune) rune {
 	switch dir {
 	case '^':
 		nextdir = '>'
-		break
 	case '>':
 		nextdir = 'v'
-		break
 	case 'v':
 		nextdir = '<'
-		break
 	case '<':
 		nextdir = '^'
-		break
 	default:
 	}
 	return nextdir
@@ -86,28 +82,25 @@ func MoveGuard(cpos []int, dir rune) bool {
 	coordkey := strconv.Itoa(cpos[0]) + "," + strconv.Itoa(cpos[1])
 	visitedMap[coordkey] = string(dir)
 
-	if !((nextY >= len(routemap) || nextY < 0) || (nextX >= len(routemap[cpos[0]]) || nextX < 0)) {
-		if routemap[nextY][nextX] == '.' || routemap[nextY][nextX] == 'X' || routemap[nextY][nextX] == '^' || routemap[nextY][nextX] == '>' || routemap[nextY][nextX] == 'v' || routemap[nextY][nextX] == '<' {
+	if (nextY < len(routemap) && nextY >= 0) && (nextX < len(routemap[cpos[0]]) && nextX >= 0) {
+		switch routemap[nextY][nextX] {
+		case '.', 'X', '^', '>', 'v', '<':
 			routemap[cpos[0]][cpos[1]] = byte(dir)
 			// routemap[nextY][nextX] = byte(dir)
 			cpos[0] = nextY
 			cpos[1] = nextX
 			currpos = cpos
 			return true
-		} else if routemap[nextY][nextX] == '#' {
+		case '#':
 			switch dir {
 			case '^':
 				dir = '>'
-				break
 			case '>':
 				dir = 'v'
-				break
 			case 'v':
 				dir = '<'
-				break
 			case '<':
 				dir = '^'
-				break
 			default:
 			}
 
@@ -116,7 +109,7 @@ func MoveGuard(cpos []int, dir rune) bool {
 			currpos = cpos
 
 			return true
-		} else {
+		default:
 			fmt.Println("Undefined movement!")
 		}
 	}
@@ -130,16 +123,16 @@ func InitializeRoutemap(filename string) {
 	floorplan = floorplan[:len(floorplan)-1]
 	for i, tileRow := range floorplan {
 		routemap = append(routemap, []byte(tileRow))
-		if strings.Index(tileRow, "^") > -1 {
+		if strings.Contains(tileRow, "^") {
 			startpos[0] = i
 			startpos[1] = strings.Index(tileRow, "^")
-		} else if strings.Index(tileRow, "<") > -1 {
+		} else if strings.Contains(tileRow, "<") {
 			startpos[0] = i
 			startpos[1] = strings.Index(tileRow, "<")
-		} else if strings.Index(tileRow, ">") > -1 {
+		} else if strings.Contains(tileRow, ">") {
 			startpos[0] = i
 			startpos[1] = strings.Index(tileRow, "<")
-		} else if strings.Index(tileRow, "v") > -1 {
+		} else if strings.Contains(tileRow, "v") {
 			startpos[0] = i
 			startpos[1] = strings.Index(tileRow, "<")
 		}
