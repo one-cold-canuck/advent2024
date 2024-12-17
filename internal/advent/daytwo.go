@@ -13,7 +13,7 @@ func RunDayTwo() []int {
 
 	results := []int{}
 
-	data := util.ReadFileIntoStrings("data/day2.txt")
+	data := util.ReadFileIntoStrings("data/day2.txt", "\n")
 	counter := 0  // for Part 1 output
 	counter2 := 0 // For Part 2 output
 	data = data[:len(data)-1]

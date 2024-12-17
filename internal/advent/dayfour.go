@@ -30,7 +30,7 @@ func RunDayFour() (results []int) {
 	results = append(results, 0)
 	results = append(results, 0)
 
-	input := util.ReadFileIntoStrings("data/day4.txt")
+	input := util.ReadFileIntoStrings("data/day4.txt", "\n")
 	input = input[:len(input)-1]
 
 	xmascount := 0

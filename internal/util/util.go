@@ -37,7 +37,7 @@ func ReadFileIntoInts(filePath string, separator string) (numbers []int) {
 	return numbers
 }
 
-func ReadFileIntoStrings(filePath string) (results []string) {
+func ReadFileIntoStrings(filePath string, separator string) (results []string) {
 	results = []string{}
 
 	values, err := os.ReadFile(filePath)
@@ -47,7 +47,7 @@ func ReadFileIntoStrings(filePath string) (results []string) {
 		return
 	}
 
-	lines := strings.Split(string(values), "\n")
+	lines := strings.Split(string(values), separator)
 
 	return lines
 }

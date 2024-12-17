@@ -49,7 +49,7 @@ func RunDayFive() []int {
 
 func GetRules(filename string) [][]string {
 
-	input := util.ReadFileIntoStrings(filename)
+	input := util.ReadFileIntoStrings(filename, "\n")
 	input = input[:len(input)-1]
 
 	ruleset := make([][]string, 0)
@@ -63,7 +63,7 @@ func GetRules(filename string) [][]string {
 }
 
 func GetPrintset(filename string) []string {
-	printset := util.ReadFileIntoStrings("data/day5-updates.txt")
+	printset := util.ReadFileIntoStrings("data/day5-updates.txt", "\n")
 	printset = printset[:len(printset)-1]
 
 	return printset
