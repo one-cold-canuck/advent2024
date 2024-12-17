@@ -34,6 +34,8 @@ func main() {
 	PrintResult(resultFive, formatter, 5)
 	resultSix := advent.RunDaySix()
 	PrintResult(resultSix, formatter, 6)
+	resultSeven := advent.RunDaySeven()
+	PrintResult(resultSeven, formatter, 7)
 }
 
 func PrintHeader(format Formatter) {

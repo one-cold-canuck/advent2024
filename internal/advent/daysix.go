@@ -53,7 +53,6 @@ func RunDaySix() []int {
 
 	for _, v := range routemap {
 		results[0] += strings.Count(string(v), "X") + strings.Count(string(v), "^") + strings.Count(string(v), ">") + strings.Count(string(v), "v") + strings.Count(string(v), "<")
-		fmt.Printf("%s\n", v)
 	}
 	results[1] = loopcount
 	return results
