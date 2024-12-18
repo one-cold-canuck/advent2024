@@ -9,9 +9,9 @@ import (
 
 var invalidprints []string
 
-func RunDayFive() []int {
+func RunDayFive() []uint64 {
 
-	results := []int{0, 0}
+	results := []uint64{0, 0}
 
 	ruleset := GetRules("data/day5-order.txt")
 	printset := GetPrintset("data/day5-updates.txt")
@@ -41,8 +41,8 @@ func RunDayFive() []int {
 		invalidprintCount += middleValue
 	}
 
-	results[0] = validprintCount
-	results[1] = invalidprintCount
+	results[0] = uint64(validprintCount)
+	results[1] = uint64(invalidprintCount)
 
 	return results
 }

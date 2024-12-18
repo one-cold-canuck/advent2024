@@ -25,7 +25,7 @@ var diagdirs [][]int = [][]int{
 var words []string = []string{"X", "M", "A", "S"}
 var diagwords []string = []string{"M", "A", "S"}
 
-func RunDayFour() (results []int) {
+func RunDayFour() (results []uint64) {
 
 	results = append(results, 0)
 	results = append(results, 0)
@@ -47,7 +47,7 @@ func RunDayFour() (results []int) {
 		}
 	}
 
-	results[0] = xmascount
+	results[0] = uint64(xmascount)
 
 	diagxmascount := 0
 
@@ -60,7 +60,7 @@ func RunDayFour() (results []int) {
 			}
 		}
 	}
-	results[1] = diagxmascount
+	results[1] = uint64(diagxmascount)
 
 	return results
 }

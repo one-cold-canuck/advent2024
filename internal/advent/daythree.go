@@ -8,7 +8,7 @@ import (
 	"github.com/one-cold-canuck/advent2024/internal/util"
 )
 
-func RunDayThree() (results []int) {
+func RunDayThree() (results []uint64) {
 
 	input := util.ReadFile("data/day3.txt")
 
@@ -42,8 +42,8 @@ func RunDayThree() (results []int) {
 		}
 	}
 
-	results = append(results, resultOne)
-	results = append(results, resultTwo)
+	results = append(results, uint64(resultOne))
+	results = append(results, uint64(resultTwo))
 
 	return results
 }

@@ -8,9 +8,9 @@ import (
 
 // RunDayOne processes the input for the Day 1 AoC puzzle (https://adventofcode.com/2024/day/1)
 // Input is split into 2 lists.
-func RunDayOne() []int {
+func RunDayOne() []uint64 {
 
-	results := []int{}
+	results := []uint64{}
 
 	rightList := util.ReadFileIntoInts("data/day1_rightlist.txt", "\n")
 	leftList := util.ReadFileIntoInts("data/day1_leftlist.txt", "\n")
@@ -41,7 +41,7 @@ func RunDayOne() []int {
 		matchCount += v * internalMatchCount
 	}
 
-	results = append(results, count)
-	results = append(results, matchCount)
+	results = append(results, uint64(count))
+	results = append(results, uint64(matchCount))
 	return results
 }

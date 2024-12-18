@@ -44,7 +44,7 @@ func PrintHeader(format Formatter) {
 	fmt.Println(format.separator)
 }
 
-func PrintResult(answer []int, format Formatter, day int) {
+func PrintResult(answer []uint64, format Formatter, day int) {
 
 	dayCell := format.outlineChar + " Day " + strconv.Itoa(day) + " "
 	if day < 10 {
@@ -54,8 +54,8 @@ func PrintResult(answer []int, format Formatter, day int) {
 
 	lineRemaining := format.lineLength - len(dayCell) - 1
 
-	partOneCell := " Part 1: " + strconv.Itoa(answer[0])
-	partTwoCell := " Part 2: " + strconv.Itoa(answer[1])
+	partOneCell := " Part 1: " + strconv.FormatUint(answer[0], 10)
+	partTwoCell := " Part 2: " + strconv.FormatUint(answer[1], 10)
 
 	cellCloser := ""
 

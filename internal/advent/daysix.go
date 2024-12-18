@@ -20,8 +20,8 @@ var direction rune
 var currpos []int = []int{0, 0}
 var visitedMap map[string]string
 
-func RunDaySix() []int {
-	results := []int{0, 0}
+func RunDaySix() []uint64 {
+	results := []uint64{0, 0}
 
 	InitializeRoutemap("data/day6-map.txt")
 
@@ -52,9 +52,9 @@ func RunDaySix() []int {
 	}
 
 	for _, v := range routemap {
-		results[0] += strings.Count(string(v), "X") + strings.Count(string(v), "^") + strings.Count(string(v), ">") + strings.Count(string(v), "v") + strings.Count(string(v), "<")
+		results[0] += uint64(strings.Count(string(v), "X") + strings.Count(string(v), "^") + strings.Count(string(v), ">") + strings.Count(string(v), "v") + strings.Count(string(v), "<"))
 	}
-	results[1] = loopcount
+	results[1] = uint64(loopcount)
 	return results
 }
 

@@ -9,9 +9,9 @@ import (
 	"github.com/one-cold-canuck/advent2024/internal/util"
 )
 
-func RunDayTwo() []int {
+func RunDayTwo() []uint64 {
 
-	results := []int{}
+	results := []uint64{}
 
 	data := util.ReadFileIntoStrings("data/day2.txt", "\n")
 	counter := 0  // for Part 1 output
@@ -48,8 +48,8 @@ func RunDayTwo() []int {
 		}
 
 	}
-	results = append(results, counter)
-	results = append(results, counter2)
+	results = append(results, uint64(counter))
+	results = append(results, uint64(counter2))
 
 	return results
 }
